@@ -8,7 +8,7 @@ import com.SpringBootMVC.ExpensesTracker.entity.User;
 import com.SpringBootMVC.ExpensesTracker.repository.ClientRepository;
 import com.SpringBootMVC.ExpensesTracker.repository.RoleRepository;
 import com.SpringBootMVC.ExpensesTracker.repository.UserRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

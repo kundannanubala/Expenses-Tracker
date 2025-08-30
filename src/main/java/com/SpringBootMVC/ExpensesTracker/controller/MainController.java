@@ -56,7 +56,7 @@ public class MainController {
     @GetMapping("/list")
     public String list(Model model, HttpSession session){
         Client client = (Client) session.getAttribute("client");
-        int clientId = client.getId();
+        String clientId = client.getId();
         List<Expense> expenseList = expenseService.findAllExpensesByClientId(clientId);
         for (Expense expense : expenseList){
             expense.setCategoryName(categoryService.findCategoryById(expense.getCategory().getId()).getName());
@@ -69,7 +69,7 @@ public class MainController {
     }
 
     @GetMapping("/showUpdate")
-    public String showUpdate(@RequestParam("expId") int id, Model model){
+    public String showUpdate(@RequestParam("expId") String id, Model model){
         Expense expense = expenseService.findExpenseById(id);
         ExpenseDTO expenseDTO = new ExpenseDTO();
         expenseDTO.setAmount(expense.getAmount());
@@ -83,7 +83,7 @@ public class MainController {
     }
 
     @PostMapping("/submitUpdate")
-    public String update(@RequestParam("expId") int id, @ModelAttribute("expense") ExpenseDTO expenseDTO, HttpSession session){
+    public String update(@RequestParam("expId") String id, @ModelAttribute("expense") ExpenseDTO expenseDTO, HttpSession session){
         Client client = (Client) session.getAttribute("client");
         expenseDTO.setExpenseId(id);
         expenseDTO.setClientId(client.getId());
@@ -92,7 +92,7 @@ public class MainController {
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("expId") int id){
+    public String delete(@RequestParam("expId") String id){
         expenseService.deleteExpenseById(id);
         return "redirect:/list";
     }
